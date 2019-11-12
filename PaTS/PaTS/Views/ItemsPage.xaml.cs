@@ -18,25 +18,22 @@ namespace PaTS.Views
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        
 
         public ItemsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+       public async void Timesheet_Tapped(object sender, EventArgs args)
         {
-            var item = args.SelectedItem as Item;
-            if (item == null)
-                return;
+       
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new ItemDetailPage());
 
-            // Manually deselect item.
-            ItemsListView.SelectedItem = null;
+          
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
@@ -44,12 +41,6 @@ namespace PaTS.Views
             await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
-        }
+    
     }
 }

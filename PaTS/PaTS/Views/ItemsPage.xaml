@@ -5,52 +5,182 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="PaTS.Views.ItemsPage"
-             Title="{Binding Title}"
+             Title="Dashboard"
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <ListView x:Name="ItemsListView"
-                ItemsSource="{Binding Items}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemsCommand}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-                ItemSelected="OnItemSelected">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Fourth Item</x:String>
-                    <x:String>Fifth Item</x:String>
-                    <x:String>Sixth Item</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Text}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            <Label Text="{Binding Description}" 
-                                d:Text="Item description"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+    <ContentPage.Content>
+        <Grid>
+            <Grid  >
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" BackgroundColor="Blue">
+                    <StackLayout BackgroundColor="Transparent"  IsClippedToBounds="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+               
+                            <Label Text="Welcome" HorizontalOptions="Start"  VerticalOptions="Center" MaxLines="1"   TextColor="White">
+                            
+
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double" Tablet="14" Phone="11" />
+                                </Label.FontSize>
+
+                                <Label.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="0,30,0,0" />
+                                        <On Platform="Android" Value="0,15,0,0" />
+                                    </OnPlatform>
+                                </Label.Margin>
+                            </Label>
+
+                            <Label x:Name="UserName" MaxLines="1" Text="User" HorizontalOptions="Start"  VerticalOptions="Center"   TextColor="LightBlue">
+                            
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double" Tablet="14" Phone="11" />
+                                </Label.FontSize>
+
+                                <Label.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="0,30,0,0" />
+                                        <On Platform="Android" Value="0,15,0,0" />
+                                    </OnPlatform>
+                                </Label.Margin>
+                            </Label>
+
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="150"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="xamarin_logo.png"  HorizontalOptions="CenterAndExpand"   Margin="0,25,0,0">
+                            </Image>
+
+                            <Label Grid.Row="1" Text="Sample" TextColor="White" FontSize="30" Margin="10,5,10,5" HorizontalTextAlignment="Center" >
+                         
+                            </Label>
+                            <Label Grid.Row="2" Text="Sample app™" TextColor="Snow" FontSize="Medium" Margin="10,5,10,10" HorizontalTextAlignment="Center" >
+                          
+                            </Label>
+
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+
+                <Image Grid.Row="1" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="CurvedMask.jpg" Margin="-6,0,-6,-6"></Image>
+
+                <StackLayout Grid.Row="2" BackgroundColor="White">
+                    <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" Margin="15">
+
+                        <Grid >
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Row="0" Grid.Column="0" CornerRadius="6" IsClippedToBounds="True" BackgroundColor="White">
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                   Tapped="Timesheet_Tapped"
+                                   NumberOfTapsRequired="1" />
+                                </Frame.GestureRecognizers>
+
+                                <Grid>
+                                    <!--<local:GradientColorStack  StartColor="#f4f4f4" EndColor="White"   >-->
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Image Source="xamarin_logo.png" Grid.Row="0"></Image>
+                                        <Label Text="Timesheets" Grid.Row="1" HorizontalTextAlignment="Center" TextColor="Black">
+                                       
+                                        </Label>
+                                    </Grid>
+                                    <!--</local:GradientColorStack>-->
+                                </Grid>
+
+
+                            </Frame>
+
+                            <Frame Grid.Row="0" Grid.Column="2" CornerRadius="6" IsClippedToBounds="True" BackgroundColor="White">
+
+                                <!--<local:GradientColorStack  StartColor="#ececed" EndColor="White"   >-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Image Source="xamarin_logo.png" Grid.Row="0"></Image>
+                                    <Label Text="Employee" Grid.Row="1" HorizontalTextAlignment="Center" TextColor="Black">
+                                      
+                                    </Label>
+                                </Grid>
+                                <!--</local:GradientColorStack>-->
+
+                            </Frame>
+
+                            <Frame Grid.Row="1" Grid.Column="0" CornerRadius="6" IsClippedToBounds="True" BackgroundColor="White">
+
+                                <!--<local:GradientColorStack  StartColor="#ececed" EndColor="White"   >-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Image Source="xamarin_logo.png" Grid.Row="0"></Image>
+                                    <Label Text="Analysis" Grid.Row="1" HorizontalTextAlignment="Center" TextColor="Black">
+                                      
+                                    </Label>
+                                </Grid>
+                                <!--</local:GradientColorStack>-->
+
+                            </Frame>
+
+                            <Frame Grid.Row="1" Grid.Column="2" CornerRadius="6" IsClippedToBounds="True" BackgroundColor="White" >
+
+                                <!--<local:GradientColorStack  StartColor="#ececed" EndColor="White"   >-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Image Source="xamarin_logo.png" Grid.Row="0"></Image>
+                                    <Label Text="Info" Grid.Row="1" HorizontalTextAlignment="Center" TextColor="Black">
+                                     
+                                    </Label>
+                                </Grid>
+                                <!--</local:GradientColorStack>-->
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
 
 </ContentPage>
